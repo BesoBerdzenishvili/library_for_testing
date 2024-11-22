@@ -27,9 +27,9 @@ const Controllers = ({ setBooks }) => {
             {language}
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item onClick={() => setLanguage("En")}>En</Dropdown.Item>
-            <Dropdown.Item onClick={() => setLanguage("Ru")}>Ru</Dropdown.Item>
-            <Dropdown.Item onClick={() => setLanguage("Fr")}>Fr</Dropdown.Item>
+            <Dropdown.Item onClick={() => setLanguage("en")}>En</Dropdown.Item>
+            <Dropdown.Item onClick={() => setLanguage("ru")}>Ru</Dropdown.Item>
+            <Dropdown.Item onClick={() => setLanguage("fr")}>Fr</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
 
