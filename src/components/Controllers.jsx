@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Dropdown, Form, InputGroup } from "react-bootstrap";
 
-const Controllers = ({ setBooks }) => {
+const Controllers = ({ setBooks, gallery, setGallery }) => {
   const [language, setLanguage] = useState("En");
   const [seed, setSeed] = useState("");
   const [likes, setLikes] = useState(5);
@@ -66,6 +66,13 @@ const Controllers = ({ setBooks }) => {
             onChange={(e) => setReview(e.target.value)}
           />
         </Form.Group>
+        <Button onClick={() => setGallery(!gallery)}>
+          {gallery ? (
+            <i className="bi bi-table" />
+          ) : (
+            <i className="bi bi-images" />
+          )}
+        </Button>
       </div>
     </div>
   );
