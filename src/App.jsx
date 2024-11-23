@@ -4,10 +4,16 @@ import Books from "./components/Books";
 
 function App() {
   const [books, setBooks] = useState({});
+  const [gallery, setGallery] = useState(false);
+
   return (
     <>
-      <Controllers setBooks={setBooks} />
-      <Books books={books} />
+      <Controllers
+        setBooks={setBooks}
+        setGallery={setGallery}
+        gallery={gallery}
+      />
+      <Books books={books} gallery={gallery} />
     </>
   );
 }

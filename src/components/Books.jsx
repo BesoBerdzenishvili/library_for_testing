@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { Table, Container } from "react-bootstrap";
+import { Table, Container, Carousel } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fr, en, ru, Faker } from "@faker-js/faker";
 import Book from "./Book";
 import Csv from "./Csv";
 
-const Books = ({ books }) => {
+const Books = ({ books, gallery }) => {
   const [data, setData] = useState([]);
   const [show, setShow] = useState("");
 
@@ -31,7 +31,7 @@ const Books = ({ books }) => {
       const newData = generateData(books.likes, books.review, 20);
       setData(newData);
     }
-  }, [books]);
+  }, [books, gallery]);
 
   const fetchMoreData = () => {
     const newData = generateData(books.likes, books.review, 10);
@@ -44,8 +44,8 @@ const Books = ({ books }) => {
       data.push({
         id: i + 1,
         cover: faker.image.urlLoremFlickr({
-          height: 380,
-          width: 280,
+          height: gallery ? 700 : 380,
+          width: gallery ? 1000 : 280,
           category: "abstract",
         }),
         isbn: faker.commerce.isbn(),
@@ -70,9 +70,22 @@ const Books = ({ books }) => {
     <>
       <Csv data={data} />
       {books.seed ? (
-        <Container>
+        <Container className={gallery && "d-flex justify-content-center"}>
+          <Carousel className={gallery ? "w-50" : "d-none"}>
+            {data.map((book) => (
+              <Carousel.Item key={book.id + book.isbn}>
+                <img src={book.cover} alt={book.title} />
+                <Carousel.Caption>
+                  <h3>{book.title}</h3>
+                  <p>{book.author}</p>
+                </Carousel.Caption>
+              </Carousel.Item>
+            ))}
+          </Carousel>
+
           <InfiniteScroll
             dataLength={data.length}
+            className={gallery && "d-none"}
             hasMore={true}
             next={fetchMoreData}
             loader={<div className="loader text-center">Loading...</div>}

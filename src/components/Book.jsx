@@ -27,7 +27,7 @@ export default function Book({ book, index, language, onClick, show }) {
               <h4>{book.publisher}</h4>
               <button className="bg-primary border-0 rounded p-1 text-light">
                 {random(book.likes)}
-                <i class="bi bi-hand-thumbs-up-fill m-1 " />
+                <i className="bi bi-hand-thumbs-up-fill m-1 " />
               </button>
               <Review numOfReviews={random(book.review)} locale={language} />
             </div>
