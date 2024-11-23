@@ -6,6 +6,7 @@ import Book from "./Book";
 
 const Books = ({ books }) => {
   const [data, setData] = useState([]);
+  const [show, setShow] = useState("");
 
   const chooseLanguage = () => {
     switch (books.language) {
@@ -56,6 +57,13 @@ const Books = ({ books }) => {
     }
     return data;
   };
+  const display = (index) => {
+    if (show === index) {
+      setShow("");
+      return;
+    }
+    setShow(index);
+  };
 
   return (
     <>
@@ -90,6 +98,8 @@ const Books = ({ books }) => {
                     book={book}
                     index={index}
                     language={[chooseLanguage(), en]}
+                    onClick={() => display(index)}
+                    show={show}
                   />
                 ))}
               </tbody>
