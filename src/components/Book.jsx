@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 import Review from "./Review";
 
-export default function Book({ book, index, language }) {
-  const [show, setShow] = useState(false);
+export default function Book({ book, index, language, onClick, show }) {
   const random = (property) => {
     return Math.random() < 0.6 ? Math.ceil(property) : Math.floor(property);
   };
   return (
     <>
-      <tr onClick={() => setShow(!show)} className="cursor-pointer">
-        <td>{show ? <span>&#11206;</span> : <span>&#11205;</span>}</td>
+      <tr onClick={onClick} className="cursor-pointer">
+        <td>
+          {show === index ? <span>&#11206;</span> : <span>&#11205;</span>}
+        </td>
         <td>{index + 1}</td>
         <td>{book.isbn}</td>
         <td>{book.title}</td>
         <td>{book.author}</td>
         <td>{book.publisher}</td>
       </tr>
-      {show && (
+      {show === index && (
         <div className="position-absolute w-100">
           <div className="d-flex">
             <img src={book.cover} alt={book.title} className="cover" />
