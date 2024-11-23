@@ -3,6 +3,7 @@ import { Table, Container } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fr, en, ru, Faker } from "@faker-js/faker";
 import Book from "./Book";
+import Csv from "./Csv";
 
 const Books = ({ books }) => {
   const [data, setData] = useState([]);
@@ -67,6 +68,7 @@ const Books = ({ books }) => {
 
   return (
     <>
+      <Csv data={data} />
       {books.seed ? (
         <Container>
           <InfiniteScroll
