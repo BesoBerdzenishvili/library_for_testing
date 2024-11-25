@@ -25,8 +25,6 @@ const Books = ({ books, gallery }) => {
   });
 
   useEffect(() => {
-    faker.seed(Number(books.seed));
-
     if (books.seed) {
       const newData = generateData(books.likes, books.review, 20);
       setData(newData);
@@ -34,15 +32,16 @@ const Books = ({ books, gallery }) => {
   }, [books, gallery]);
 
   const fetchMoreData = () => {
-    const newData = generateData(books.likes, books.review, 10);
+    const newData = generateData(books.likes, books.review, 10, data.length);
     setData([...data, ...newData]);
   };
 
-  const generateData = (likes, review, count) => {
+  const generateData = (likes, review, count, offset = 0) => {
     const data = [];
+    faker.seed(Number(books.seed) + offset);
     for (let i = 0; i < count; i++) {
       data.push({
-        id: i + 1,
+        id: offset + i + 1,
         cover: faker.image.urlLoremFlickr({
           height: gallery ? 700 : 380,
           width: gallery ? 1000 : 280,
@@ -58,6 +57,7 @@ const Books = ({ books, gallery }) => {
     }
     return data;
   };
+
   const display = (index) => {
     if (show === index) {
       setShow("");
