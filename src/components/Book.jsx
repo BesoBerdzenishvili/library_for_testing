@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Review from "./Review";
 
 export default function Book({ book, index, language, onClick, show }) {

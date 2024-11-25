@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Dropdown, Form, InputGroup } from "react-bootstrap";
 
 const Controllers = ({ setBooks, gallery, setGallery }) => {
-  const [language, setLanguage] = useState("En");
+  const [language, setLanguage] = useState("en");
   const [seed, setSeed] = useState("");
   const [likes, setLikes] = useState(5);
   const [review, setReview] = useState(0);
@@ -18,6 +18,10 @@ const Controllers = ({ setBooks, gallery, setGallery }) => {
       review,
     });
   };
+
+  useEffect(() => {
+    handleGenerate();
+  }, [language, seed, likes, review]);
 
   return (
     <div className="sticky-top bg-light p-3">
@@ -42,10 +46,6 @@ const Controllers = ({ setBooks, gallery, setGallery }) => {
           />
         </Form.Group>
 
-        <Button variant="primary" onClick={handleGenerate}>
-          GENERATE
-        </Button>
-
         <Form.Group>
           <Form.Label>Likes: {likes}</Form.Label>
           <Form.Range
@@ -54,7 +54,7 @@ const Controllers = ({ setBooks, gallery, setGallery }) => {
             max={10}
             step={0.1}
             value={likes}
-            onChange={(e) => setLikes(e.target.value)}
+            onChange={(e) => setLikes(Number(e.target.value))}
           />
         </Form.Group>
 
@@ -63,9 +63,10 @@ const Controllers = ({ setBooks, gallery, setGallery }) => {
           <Form.Control
             type="number"
             value={review}
-            onChange={(e) => setReview(e.target.value)}
+            onChange={(e) => setReview(Number(e.target.value))}
           />
         </Form.Group>
+
         <Button onClick={() => setGallery(!gallery)}>
           {gallery ? (
             <i className="bi bi-table" />
